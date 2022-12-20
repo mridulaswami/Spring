@@ -1,0 +1,41 @@
+Here I created a class and then increased the modularity by allowing seperation of cross cutting concerns. Made a bean and then inserted it in main class using spring annotations.
+
+
+
+###Paymentserviceimpl(service to be added in main class)
+
+package com.example.demo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class Paymentserviceimpl {
+	@Bean
+	public void makepayment() {
+		System.out.println("the payment has been made");
+	}
+
+}
+
+
+
+
+##MridulaApplication.java(main class)
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class MridulaApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext context = SpringApplication.run(MridulaApplication.class, args);
+		context.getBean("makepayment");
+	}
+
+}
+
