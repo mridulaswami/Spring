@@ -1,0 +1,38 @@
+package com.example.demo;
+
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
+
+
+@Component
+@Aspect
+@EnableAspectJAutoProxy
+public class myaspect {
+	@Before("execution(* com.example.demo.Paymentserviceimpl.makepayment())")
+	public void printbefore() {
+		System.out.println("this will be printed first");
+	}
+
+	@After("execution(* com.example.demo.Paymentserviceimpl.makepayment())")
+	public void printafter() {
+	System.out.println("this will be printed at last");
+	}
+
+	@Around("execution(* com.example.demo.Paymentserviceimpl.makepayment())")
+	public void printaround(ProceedingJoinPoint joinpoint)  {
+		System.out.println("no reply");
+	    try {
+			joinpoint.proceed();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		System.out.println("heyyaa");
+	}
+
+}
